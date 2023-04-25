@@ -13,7 +13,7 @@ db.transaction(function (tx) {
             const priceCell = newRow.insertCell();
             nameCell.textContent = row.name;
             descriptionCell.textContent = row.description;
-            priceCell.textContent = `$${ row.price }`;
+            priceCell.textContent = `${ row.price }€`;
         }
     });
 });
@@ -30,13 +30,9 @@ db.transaction(function (tx) {
 
     nameCell.textContent = data.Nosaukums;
     descriptionCell.textContent = data.Apraksts;
-    priceCell.textContent = `$${ data.Cena }`;
+    priceCell.textContent = `${ data.Cena }€`;
     db.transaction(function (tx) {
-        tx.executeSql('INSERT INTO menu_items (name, description, price) VALUES (?, ?, ?)', [
-            data.Nosaukums,
-            data.Apraksts,
-            data.Cena
-        ]);
+        tx.executeSql([data.Nosaukums, data.Apraksts, data.Cena]);
     });
     itemForm.reset();
 });
